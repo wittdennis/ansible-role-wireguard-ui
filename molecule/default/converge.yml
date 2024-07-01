@@ -1,0 +1,6 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  roles:
+    - { role: wittdennis.wireguard_ui, tags: molecule-idempotence-notest }

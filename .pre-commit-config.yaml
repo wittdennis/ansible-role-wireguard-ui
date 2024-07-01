@@ -5,4 +5,4 @@ repos:
       - id: ansible-lint
         files: ^(?!\.).*\.(yaml|yml)$
         verbose: true
-        args: ["-p", "./", "--exclude", ".pre-commit-config.yaml"]
+        args: ["-p", "./"]
