@@ -1,2 +1,32 @@
 ---
-# tasks file for role_remplate
+- name: Set common role facts
+  ansible.builtin.set_fact:
+    download_url: https://github.com/ngoduykhanh/wireguard-ui/releases/download/{{ wireguard_ui_version }}/wireguard-ui-{{ wireguard_ui_version }}-{{ wireguard_ui_os }}-{{ wireguard_ui_architecture }}.tar.gz # noqa: yaml[line-length]
+    checksum_url: md5:https://github.com/ngoduykhanh/wireguard-ui/releases/download/{{ wireguard_ui_version }}/wireguard-ui-{{ wireguard_ui_version }}-{{ wireguard_ui_os }}-{{ wireguard_ui_architecture }}.tar.gz.md5 # noqa: yaml[line-length]
+    archive_name: wireguard-ui-{{ wireguard_ui_version }}-{{ wireguard_ui_os }}-{{ wireguard_ui_architecture }}.tar.gz
+
+- name: Get current version
+  ansible.builtin.command:
+    cmd: /usr/local/bin/wireguard-ui -version
+  changed_when: false
+  failed_when: false
+  register: current_version_cmd
+
+- name: Download new version
+  when: current_version_cmd.stdout != wireguard_ui_version | default(false)
+  ansible.builtin.get_url:
+    url: "{{ download_url }}"
+    checksum: "{{ checksum_url }}"
+    dest: /tmp
+    owner: root
+    group: root
+    mode: "0644"
+  notify: unarchive_package
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Remove archive
+  ansible.builtin.file:
+    path: /tmp/{{ archive_name }}
+    state: absent

@@ -1,2 +1,4 @@
 ---
-# defaults file for role_remplate
+wireguard_ui_os: linux
+wireguard_ui_version: "v0.6.2" # renovate: datasource=github-tags depName=ngoduykhanh/wireguard-ui versioning=semver
+wireguard_ui_architecture: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"

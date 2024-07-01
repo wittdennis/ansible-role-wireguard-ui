@@ -1,2 +1,7 @@
 ---
-# handlers file for role_remplate
+- name: Unpack binary
+  listen: unarchive_package
+  ansible.builtin.unarchive:
+    src: "/tmp/{{ archive_name }}"
+    dest: /usr/local/bin
+    remote_src: true
