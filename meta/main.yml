@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Dennis Witt
   description: Role to manage a wireguard ui installation
