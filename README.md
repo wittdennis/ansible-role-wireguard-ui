@@ -1,38 +1,37 @@
-Role Name
-=========
+# wireguard_ui
 
-A brief description of the role goes here.
+Ansible role to manage a [wireguard-ui](https://github.com/ngoduykhanh/wireguard-ui) instance.
 
-Requirements
-------------
+## Role Variables
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Use the `wireguard_ui_version` to specify the version you want to install.
 
-Role Variables
---------------
+Default:
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+wireguard_ui_version: "v0.6.2"
+```
 
-Dependencies
-------------
+You can use the `wireguard_ui_os` variable to specify the os family where the wireguard-ui should be installed.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Default:
 
-Example Playbook
-----------------
+```yaml
+wireguard_ui_os: linux
+```
+
+The Role
+
+## Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: servers
+  roles:
+    - { role: wittdennis.wireguard_ui, wireguard_ui_version: "v0.5.2" }
+```
 
-License
--------
+## License
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
